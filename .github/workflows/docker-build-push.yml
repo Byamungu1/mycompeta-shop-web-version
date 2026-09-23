@@ -9,7 +9,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  # GHCR strictly requires lowercase repository names
+  IMAGE_NAME: byamungu1/mycompeta-shop-web-version
 
 jobs:
   build-and-push:
@@ -32,7 +33,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GHCR_PAT }}
 
       - name: Extract metadata for Docker
         id: meta
@@ -71,12 +72,12 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GHCR_PAT }}  # Use GHCR_PAT here instead of GITHUB_TOKEN
 
       - name: Create .env file
         run: |
-          echo "REGISTRY=ghcr.io" >> .env
-          echo "IMAGE_NAME=${{ github.repository }}" >> .env
+          echo "REGISTRY=${{ env.REGISTRY }}" >> .env
+          echo "IMAGE_NAME=${{ env.IMAGE_NAME }}" >> .env
           echo "IMAGE_TAG=${{ needs.build-and-push.outputs.image-tag }}" >> .env
           echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
           echo "VITE_CART_STORAGE_KEY=${{ secrets.VITE_CART_STORAGE_KEY }}" >> .env
@@ -87,19 +88,19 @@ jobs:
 
       - name: Pull built image
         if: github.event_name != 'pull_request'
-        run: docker-compose pull
+        run: docker compose pull
 
       - name: Build image locally for PR testing
         if: github.event_name == 'pull_request'
-        run: docker-compose build
+        run: docker compose build
 
       - name: Run Docker Compose
-        run: docker-compose up -d
+        run: docker compose up -d
 
       - name: Wait for container to be ready
         run: |
           timeout 60s bash -c '
-            until docker-compose ps | grep -q "running"; do
+            until docker compose ps | grep -q "running"; do
               echo "Waiting for container to start..."
               sleep 3
             done
@@ -110,11 +111,11 @@ jobs:
 
       - name: Container Logs on Failure
         if: failure()
-        run: docker-compose logs
+        run: docker compose logs
 
       - name: Stop Docker Compose
         if: always()
-        run: docker-compose down -v
+        run: docker compose down -v
 
   deploy:
     runs-on: ubuntu-latest

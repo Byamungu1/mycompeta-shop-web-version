@@ -2,10 +2,7 @@ version: '3.8'
 
 services:
   web:
-    image: ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG:-latest}
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/byamungu1/mycompeta-shop-web-version:latest
     container_name: competa-shop-web
     ports:
       - "3000:80"
