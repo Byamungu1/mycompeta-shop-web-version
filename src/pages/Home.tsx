@@ -140,6 +140,8 @@ const Index = () => {
     const hasProducts = products && products.length > 0;
     const hasPopularProducts = popularProducts && popularProducts.length > 0;
 
+    console.log('the popular products are', popularProducts);
+
     return (
         <SafeAreadiv className='bg-sand-50 flex-1'>
             <div className='flex-1 px-4 md:px-6 lg:px-8'>

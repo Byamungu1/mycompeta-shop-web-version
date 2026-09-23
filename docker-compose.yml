@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:${IMAGE_TAG:-latest}
+    image: ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG:-latest}
     build:
       context: .
       dockerfile: Dockerfile
