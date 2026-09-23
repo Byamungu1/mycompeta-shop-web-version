@@ -100,10 +100,11 @@ jobs:
       - name: Wait for container to be ready
         run: |
           timeout 60s bash -c '
-            until docker compose ps | grep -q "running"; do
+            until docker compose ps | grep -iE "up|running"; do
               echo "Waiting for container to start..."
               sleep 3
             done
+          '
           '
 
       - name: Test application
