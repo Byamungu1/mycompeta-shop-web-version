@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  web:
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:${IMAGE_TAG:-latest}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: competa-shop-web
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
+      - VITE_API_URL=${VITE_API_URL:-/api/}
+      - VITE_CART_STORAGE_KEY=${VITE_CART_STORAGE_KEY:-user_shopping_cart}
+      - VITE_DIRECT_BUY_STORAGE_KEY=${VITE_DIRECT_BUY_STORAGE_KEY:-directBuyProduct}
+      - VITE_GOOGLE_CLIENT_ID=${VITE_GOOGLE_CLIENT_ID:-}
+      - VITE_GOOGLE_REDIRECT_URL=${VITE_GOOGLE_REDIRECT_URL:-}
+    restart: unless-stopped
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
