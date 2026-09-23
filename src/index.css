@@ -1,0 +1,353 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 210 14% 96%;
+  --foreground: 210 15% 11%;
+  --surface: 0 0% 100%;
+  --primary: 204 53% 38%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 29 88% 64%;
+  --muted: 210 12% 90%;
+  --muted-foreground: 210 8% 42%;
+  --border: 210 13% 84%;
+  --overlay: 210 15% 11% / 0.55;
+  --shadow-card: 0 1px 2px hsl(210 15% 11% / 0.06), 0 8px 24px hsl(210 15% 11% / 0.04);
+}
+
+/* ---------------------------------------------------------------
+   Brand fonts (Plus Jakarta Sans, DM Mono, Syne)
+   Served from assets/fonts via the `publicDir: 'assets'` config.
+---------------------------------------------------------------- */
+@font-face {
+  font-family: 'PlusJakartaSans-Regular';
+  src: url('/fonts/PlusJakartaSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PlusJakartaSans-Italic';
+  src: url('/fonts/PlusJakartaSans-Italic.ttf') format('truetype');
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PlusJakartaSans-ExtraLight';
+  src: url('/fonts/PlusJakartaSans-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PlusJakartaSans-ExtraLightItalic';
+  src: url('/fonts/PlusJakartaSans-ExtraLightItalic.ttf') format('truetype');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PlusJakartaSans-Light';
+  src: url('/fonts/PlusJakartaSans-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PlusJakartaSans-LightItalic';
+  src: url('/fonts/PlusJakartaSans-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PlusJakartaSans-Medium';
+  src: url('/fonts/PlusJakartaSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PlusJakartaSans-MediumItalic';
+  src: url('/fonts/PlusJakartaSans-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PlusJakartaSans-SemiBold';
+  src: url('/fonts/PlusJakartaSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PlusJakartaSans-SemiBoldItalic';
+  src: url('/fonts/PlusJakartaSans-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PlusJakartaSans-Bold';
+  src: url('/fonts/PlusJakartaSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PlusJakartaSans-BoldItalic';
+  src: url('/fonts/PlusJakartaSans-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PlusJakartaSans-ExtraBold';
+  src: url('/fonts/PlusJakartaSans-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PlusJakartaSans-ExtraBoldItalic';
+  src: url('/fonts/PlusJakartaSans-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DMMono-Regular';
+  src: url('/fonts/DMMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DMMono-Italic';
+  src: url('/fonts/DMMono-Italic.ttf') format('truetype');
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DMMono-Light';
+  src: url('/fonts/DMMono-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DMMono-LightItalic';
+  src: url('/fonts/DMMono-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DMMono-Medium';
+  src: url('/fonts/DMMono-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DMMono-MediumItalic';
+  src: url('/fonts/DMMono-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Syne-Regular';
+  src: url('/fonts/Syne-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Syne-Medium';
+  src: url('/fonts/Syne-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Syne-SemiBold';
+  src: url('/fonts/Syne-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Syne-Bold';
+  src: url('/fonts/Syne-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Syne-ExtraBold';
+  src: url('/fonts/Syne-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-display: swap;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: #fafaf9;
+    color: #1c1917;
+    font-family: 'PlusJakartaSans-Regular', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .app-shell {
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+
+  .app-page {
+    width: 100%;
+    min-height: 100%;
+  }
+
+  .app-page > div:first-child,
+  .app-page > [class*='overflow-y'] > div:first-child {
+    width: 100%;
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .app-responsive-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px !important;
+  }
+
+  .app-responsive-grid > :first-child:not([class*='border']):not([role='button']) {
+    grid-column: 1 / -1;
+  }
+
+  .app-shell input,
+  .app-shell textarea,
+  .app-shell select {
+    min-width: 0;
+  }
+
+  .app-shell [role='button'] {
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+  }
+
+  .app-shell [role='button']:active {
+    transform: translateY(1px);
+  }
+
+  @media (min-width: 768px) {
+    .app-page > div:first-child,
+    .app-page > [class*='overflow-y'] > div:first-child {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .app-responsive-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px !important;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .app-responsive-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+
+  #root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* React Native `View` is always a flex column. The ported markup uses
+     plain <div>s, so mirror that default here. Tailwind utilities
+     (flex-row, hidden, block, grid, …) override it as usual. */
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  /* Neutralise Chrome's autofill tint so filled fields keep the flat look. */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #1c1917;
+    -webkit-box-shadow: 0 0 0 1000px transparent inset;
+    transition: background-color 9999s ease-in-out 0s;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+
+  /* Map leftover React Native props to CSS */
+  img[resizemode='cover'],
+  img[resizeMode='cover'] {
+    object-fit: cover;
+  }
+  img[resizemode='contain'],
+  img[resizeMode='contain'] {
+    object-fit: contain;
+  }
+  img[resizemode='stretch'],
+  img[resizeMode='stretch'] {
+    object-fit: fill;
+  }
+
+  [pointerevents='none'],
+  [pointerEvents='none'] {
+    pointer-events: none;
+  }
+
+  [numberoflines='1'] {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  [numberoflines='2'] {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  [numberoflines='3'] {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

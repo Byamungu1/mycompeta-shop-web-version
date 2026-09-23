@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#F59E0B" />
+    <title>myCompeta Shop</title>
+    <script>
+      // Legacy asset resolver: the ported screens still call
+      // require('../../assets/imgs/logo.png'). Map those to the URLs the
+      // dev server actually serves (assets/ is mounted at the site root).
+      window.require = function (assetPath) {
+        var p = String(assetPath).replace(/\\/g, '/');
+        var marker = 'assets/';
+        var i = p.lastIndexOf(marker);
+        if (i !== -1) p = p.slice(i + marker.length);
+        p = p.replace(/^imgs\//, 'images/');
+        return '/' + p.replace(/^\/+/, '');
+      };
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

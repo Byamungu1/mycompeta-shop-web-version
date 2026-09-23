@@ -1,0 +1,7 @@
+{
+  "editor.codeActionsOnSave": {
+    "src.fixAll": "explicit",
+    "src.organizeImports": "explicit",
+    "src.sortMembers": "explicit"
+  }
+}
