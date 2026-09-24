@@ -4,6 +4,7 @@ import { CartIcon, NotificationIcon } from '@/components/layout/NotificationIcon
 import { ProductCard, ProductTrendingCard } from '@/components/product/ProductCard'
 import RefetchData from '@/components/common/RefetchData'
 import SearchInput from '@/components/common/SearchInput'
+import SEO from '@/components/common/SEO'
 import { useCategories } from '@/context/categoryContext'
 import { useGlobalCounts } from '@/context/globalCountContext'
 import { useFetch } from '@/hooks/useApi'
@@ -144,6 +145,11 @@ const Index = () => {
 
     return (
         <SafeAreadiv className='bg-sand-50 flex-1'>
+            <SEO 
+                title="myCompeta Shop - Discover Products & Local Sellers"
+                description="Browse amazing products from local sellers on myCompeta Shop. Find great deals, shop securely, and support local businesses."
+                keywords="online shopping, local marketplace, buy products, sell products, e-commerce, myCompeta shop"
+            />
             <div className='flex-1 px-4 md:px-6 lg:px-8'>
                 {/* Header */}
                 <div className='flex flex-row items-center justify-between border-b border-sand-200 mb-3'>

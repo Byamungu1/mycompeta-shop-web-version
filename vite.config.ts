@@ -52,6 +52,17 @@ const assetsPlugin = () => {
       const outDir = r('./dist');
       if (fs.existsSync(outDir)) {
         fs.cpSync(assetsRoot, outDir, { recursive: true });
+        
+        // Copy SEO files to dist
+        const robotsPath = r('./robots.txt');
+        const sitemapPath = r('./sitemap.xml');
+        
+        if (fs.existsSync(robotsPath)) {
+          fs.copyFileSync(robotsPath, path.join(outDir, 'robots.txt'));
+        }
+        if (fs.existsSync(sitemapPath)) {
+          fs.copyFileSync(sitemapPath, path.join(outDir, 'sitemap.xml'));
+        }
       }
     },
   };

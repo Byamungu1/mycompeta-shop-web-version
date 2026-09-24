@@ -1,6 +1,7 @@
 import Header from '@/components/layout/Header'
 import { CartIcon } from '@/components/layout/NotificationIcon'
 import RefetchData from '@/components/common/RefetchData'
+import SEO from '@/components/common/SEO'
 import SellerConflictModal from '@/components/seller/SellerConflictModal'
 import { useGlobalCounts } from '@/context/globalCountContext'
 import { useLoadingSpinner } from '@/context/loadingSpinnerContext'
@@ -12,6 +13,7 @@ import { directBuy } from '@/services/cart'
 import { fetchProductDetails } from '@/services/products'
 import getDiscountDetails from '@/utils/getDiscountDetails'
 import { validateProduct } from '@/utils/validateProductt'
+import { generateProductStructuredData, injectStructuredData } from '@/utils/structuredData'
 import { useFocusEffect, useLocalSearchParams } from '@/router'
 import { ShoppingBag, ShoppingCart, X } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -182,6 +184,14 @@ const ProductDetails = () => {
         return () => observer.disconnect();
     }, [product]);
 
+    // Inject structured data for SEO
+    useEffect(() => {
+        if (product) {
+            const structuredData = generateProductStructuredData(product);
+            injectStructuredData(structuredData);
+        }
+    }, [product]);
+
     useFocusEffect(
         useCallback(() => {
             const perfomRefetchData = async () => {
@@ -348,6 +358,15 @@ const ProductDetails = () => {
     console.log('the product details image', product.images?.[0]?.image)
     return (
         <SafeAreadiv className="bg-sand-50 flex-1">
+            <SEO 
+                title={`${product.name} - myCompeta Shop`}
+                description={`${product.description || product.name}. Buy ${product.name} at ${finalPrice} on myCompeta Shop. ${product.discount ? `Save ${percentOff}%!` : ''}`}
+                keywords={`${product.name}, ${product.category?.name || ''}, buy online, myCompeta shop, ${product.seller?.shop_name || 'local seller'}`}
+                ogImage={product.images?.[0]?.image || 'https://shop.mycompeta.online/images/logo.png'}
+                ogUrl={`https://shop.mycompeta.online/product/${product.id}`}
+                ogType="product"
+                ogImageAlt={`${product.name} product image`}
+            />
             <div className="px-4 sm:px-6 lg:px-8 w-full flex-1 mt-4 max-w-4xl mx-auto relative">
                 <div className='flex flex-row justify-between items-center gap-3'>
                     <div style={{ flex: 1 }}>
