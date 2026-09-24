@@ -59,7 +59,7 @@ const assetsPlugin = () => {
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
-  const apiUrl = env.VITE_API_URL || env.EXPO_PUBLIC_API_URL || '/api/';
+  const apiUrl = env.VITE_API_URL || env.EXPO_PUBLIC_API_URL || 'https://shop.mycompeta.online/api/';
   const proxyTarget = env.VITE_API_PROXY_TARGET || 'https://shop.mycompeta.online';
 
   return {
