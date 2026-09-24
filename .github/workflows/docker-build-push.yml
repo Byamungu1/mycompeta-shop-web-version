@@ -55,6 +55,12 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          build-args: |
+            VITE_API_URL=${{ secrets.VITE_API_URL }}
+            VITE_CART_STORAGE_KEY=${{ secrets.VITE_CART_STORAGE_KEY }}
+            VITE_DIRECT_BUY_STORAGE_KEY=${{ secrets.VITE_DIRECT_BUY_STORAGE_KEY }}
+            VITE_GOOGLE_CLIENT_ID=${{ secrets.VITE_GOOGLE_CLIENT_ID }}
+            VITE_GOOGLE_REDIRECT_URL=${{ secrets.VITE_GOOGLE_REDIRECT_URL }}
 
   docker-compose-test:
     runs-on: ubuntu-latest
