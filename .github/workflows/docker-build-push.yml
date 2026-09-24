@@ -109,7 +109,12 @@ jobs:
           done
 
       - name: Test application
-        run: curl -f http://localhost:3000 || exit 1
+        run: |
+          for i in {1..30}; do
+            curl -f http://localhost:3000 && exit 0
+            sleep 2
+          done
+          exit 1
 
       - name: Container Logs on Failure
         if: failure()
