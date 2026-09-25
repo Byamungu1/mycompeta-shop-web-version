@@ -16,7 +16,7 @@ services:
       - "3000:10000"
     extra_hosts:
       # Spoofs the backend locally so Nginx boots successfully
-      - "mycometashopbackend-v1:127.0.0.1"
+      - "mycompetashopbackend-v1:127.0.0.1"
     restart: unless-stopped
     networks:
       - app-network
