@@ -154,15 +154,13 @@ jobs:
           script: |
             cd /var/www/mycompeta-web-service
             
-            # 1. Login to GitHub Container Registry (GHCR)
             echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
             
-            # 2. Login to Docker Hub (using a Docker Hub PAT stored in GitHub Secrets)
-            echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "chamu12" --password-stdin
+            # 2. Pull only the latest frontend image
+            docker compose pull mycompeta-shop-frontend
             
-            # 3. Pull latest images and restart containers
-            docker compose pull
-            docker compose up -d --remove-orphans
+            # 3. Recreate and start only the frontend container
+            docker compose up -d --no-deps mycompeta-shop-frontend
             
             # 4. Clean up old unused images
             docker image prune -f
