@@ -145,6 +145,24 @@ jobs:
       contents: read
 
     steps:
-      - name: Trigger Render Deployment
-        run: |
-          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
+      - name: Deploy to DigitalOcean Droplet
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DROPLET_HOST }}
+          username: ${{ secrets.DROPLET_USER }}
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          script: |
+            cd /var/www/mycompeta-web-service
+            
+            # 1. Login to GitHub Container Registry (GHCR)
+            echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+            
+            # 2. Login to Docker Hub (using a Docker Hub PAT stored in GitHub Secrets)
+            echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "chamu12" --password-stdin
+            
+            # 3. Pull latest images and restart containers
+            docker compose pull
+            docker compose up -d --remove-orphans
+            
+            # 4. Clean up old unused images
+            docker image prune -f
